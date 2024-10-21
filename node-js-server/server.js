@@ -11,7 +11,7 @@ var corsOptions = {
   origin: "http://localhost:8081",
 };
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
@@ -26,10 +26,12 @@ const db = require("./app/models");
 // const port = db.sequelize;
 // console.log(db.sequelize.sync());
 
-// drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+db.sequelize.sync();
+
+// // drop the table if it already exists
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 // simple route
 app.get("/", (req, res) => {
